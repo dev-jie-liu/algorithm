@@ -1,0 +1,4 @@
+[workspace]
+members = [
+    "max_sub_array"
+]
