@@ -1,20 +1,24 @@
 /*
  * @Author:LiuJie
  * @Date: 2022-01-25 12:06:52
+ * @LastEditors: LiuJie
+ * @LastEditTime: 2022-01-26 09:36:57
  * @LastEditTime: 2022-01-25 14:43:19
  */
+
 extern crate num_traits;
 
 use crate::num_traits::AsPrimitive;
 
-///
+
+/// 扫描数组中第一个可能的和最大区间
 ///
 /// # Arguments
 ///
 /// * `nums`:
-///
-/// returns: (f64, i32, i32, i32)
-///
+/// 数组切片
+/// returns: (T, usize, usize, Option<&[T]>)
+/// 最大和, 最大子区间起始索引，最大子区间终止索引，未扫描区间
 /// # Examples
 ///
 /// ```
@@ -29,7 +33,7 @@ fn first_max_sub_array<T: 'static>(nums: &[T]) -> (T, usize, usize, Option<&[T]>
 
     //去除数组开头的连续小于等于0的数
     let mut left_index = 0;
-    for (i, num) in nums.iter().enumerate() {
+    for num in nums {
         if *num > 0_i32.as_() {
             break;
         }
@@ -94,7 +98,7 @@ pub fn max_sub_array<T: std::cmp::PartialOrd + Copy + 'static>(nums: Vec<T>) -> 
 
     let mut input_nums = &nums[..];
     loop {
-        let (sub_max_sum, i_sub_begin, i_sub_end, next_nums) =
+        let (sub_max_sum, _i_sub_begin, _i_sub_end, next_nums) =
             first_max_sub_array(input_nums);
         if first {
             max_sum = sub_max_sum;
@@ -122,8 +126,7 @@ mod tests {
 
     #[test]
     fn test_max_sub_array() {
-
         let max_sum = max_sub_array(vec![8,-19,5,-4,20]);
-        println!("max: {}", max_sum);
+        assert_eq!(max_sum, 21);
     }
 }
