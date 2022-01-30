@@ -108,6 +108,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "sort"
+version = "0.1.0"
+dependencies = [
+ "num-traits",
+]
+
+[[package]]
 name = "syn"
 version = "1.0.86"
 source = "registry+https://github.com/rust-lang/crates.io-index"

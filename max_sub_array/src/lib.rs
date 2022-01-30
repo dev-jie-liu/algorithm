@@ -24,6 +24,7 @@ use crate::num_traits::AsPrimitive;
 /// ```
 ///
 /// ```
+#[inline(always)]
 fn first_max_sub_array<T: 'static>(nums: &[T]) -> (T, usize, usize, Option<&[T]>)
     where
         T: num_traits::NumAssign + std::fmt::Display + std::cmp::PartialOrd + Copy + std::fmt::Debug,
@@ -88,6 +89,7 @@ fn first_max_sub_array<T: 'static>(nums: &[T]) -> (T, usize, usize, Option<&[T]>
     };
 }
 
+#[inline(always)]
 pub fn max_sub_array<T: std::cmp::PartialOrd + Copy + 'static>(nums: Vec<T>) -> T
     where
         T: num_traits::NumAssign + std::fmt::Display + std::fmt::Debug,
@@ -126,7 +128,7 @@ mod tests {
 
     #[test]
     fn test_max_sub_array() {
-        let max_sum = max_sub_array(vec![8,-19,5,-4,20]);
+        let max_sum = max_sub_array_1(vec![-4, 8, 10, 5, -40, 20]);
         assert_eq!(max_sum, 21);
     }
 }
