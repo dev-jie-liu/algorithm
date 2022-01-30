@@ -2,7 +2,19 @@ extern crate num_traits;
 
 use num_traits::AsPrimitive;
 
-// fn merge_sort<>
+pub fn selection_sort<T: Copy + std::cmp::PartialOrd>(nums: &mut [T]) -> Vec<T> {
+    for i in 0..nums.len() {
+        for j in 0..(nums.len() - i - 1) {
+            if nums[j] > nums[j + 1] {
+                let tmp = nums[j];
+                nums[j] = nums[j + 1];
+                nums[j + 1] = tmp;
+            }
+        }
+    }
+    return nums.to_vec();
+}
+
 
 #[inline(always)]
 fn merge_sort<T: 'static>(nums: &mut [T]) -> Vec<T>
@@ -30,6 +42,7 @@ fn merge_sort<T: 'static>(nums: &mut [T]) -> Vec<T>
             }
             return nums.to_vec();
         }
+
         if after_idx == after_nums_order.len() {
             for num in &before_nums_order[before_idx..] {
                 nums[nums_order_idx] = *num;
@@ -54,6 +67,13 @@ fn merge_sort<T: 'static>(nums: &mut [T]) -> Vec<T>
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn test_selection_sort() {
+        let mut nums = vec![4, 8, 1];
+        let sort_nums = selection_sort(&mut nums[..]);
+        assert_eq!(vec![1, 4, 8], sort_nums);
+    }
 
     #[test]
     fn it_works() {
